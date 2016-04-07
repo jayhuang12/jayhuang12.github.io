@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Chart.js | Open source HTML5 Charts for your website</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimal-ui">
+	</head>
+
+	<body>
+		<div class="content-main">
+			<section class="features container">
+				
+				<article>
+					<h3>Interactive <span class="badge new">new</span></h3>
+					<div class="canvas-holder half">
+						<canvas id="interactive-bar" width="400" height="250">
+						</canvas>
+					</div>
+				</article>
+			</section>
+		</div>
+
+
+	<script src="js/Chart.min.js"></script>
+	<script>(function(){
+
+
+	var data = [],
+		barsCount = 50,
+		labels = new Array(barsCount),
+		updateDelayMax = 500,
+		$id = function(id){
+			return document.getElementById(id);
+		},
+		random = function(max){ return Math.round(Math.random()*100)},
+		helpers = Chart.helpers;
+
+
+	Chart.defaults.global.responsive = true;
+
+	
+	// Interative micro bar chart
+
+	(function(){
+		var canvas = $id('interactive-bar'),
+			ctx = canvas.getContext('2d'),
+			microBar = new Chart(ctx).Bar({
+				labels: new Array(7),
+				datasets: [{
+					fillColor : "rgba(239,241,245,1)",
+					strokeColor : "rgba(0,0,0,0)",
+					highlightFill: "rgba(230,233,240,1)",
+					data: [random(), random(), random(), random(), random(), random(), random()]
+				}]
+			}, {
+				animation: false,
+				showScale: false,
+				barShowStroke: false,
+				tooltipXPadding: 10,
+				tooltipYPadding: 6,
+				tooltipFontSize: 18,
+				tooltipFontStyle: 'bold',
+				// Boolean - If we want to override with a hard coded scale
+				scaleOverride: true,
+
+				// ** Required if scaleOverride is true **
+				// Number - The number of steps in a hard coded scale
+				scaleSteps: 2,
+				// Number - The value jump in the hard coded scale
+				scaleStepWidth: 50,
+				// Number - The scale starting value
+				scaleStartValue: 0,
+			});
+
+		helpers.addEvent(canvas, 'mousemove', function(evt){
+			var bars =microBar.getBarsAtEvent(evt);
+			if (bars.length > 0){
+				canvas.style.cursor = "pointer";
+			}
+			else {
+				canvas.style.cursor = "default";
+			}
+		});
+
+		helpers.addEvent(canvas, 'mouseclick', function(evt){
+			microBar.options.animation = true;
+			microBar.options.onAnimationComplete = function(){
+				this.showTooltip(this.activeElements, true);
+			};
+			var bars = microBar.getBarsAtEvent(evt);
+			helpers.each(bars, function(bar){
+				bar.value = Math.max(random(), 5);
+			});
+			if (bars.length > 0){
+				microBar.update();
+			}
+		});
+
+	})();
+
+	function Colour(col, amt) {
+
+		var usePound = false;
+
+		if (col[0] == "#") {
+			col = col.slice(1);
+			usePound = true;
+		}
+
+		var num = parseInt(col,16);
+
+		var r = (num >> 16) + amt;
+
+		if (r > 255) r = 255;
+		else if  (r < 0) r = 0;
+
+		var b = ((num >> 8) & 0x00FF) + amt;
+
+		if (b > 255) b = 255;
+		else if  (b < 0) b = 0;
+
+		var g = (num & 0x0000FF) + amt;
+
+		if (g > 255) g = 255;
+		else if (g < 0) g = 0;
+
+		return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+
+	}
+
+})();
+</script>
+	</body>
+</html>
