@@ -1,0 +1,39 @@
+#center {
+	margin:auto;
+	text-align: center;
+}
+
+#options {
+   display:table;
+   margin: 0 auto;
+   
+}
+
+.jumbotron{
+	background-color: #337ab7;
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+}
+
+h1.pagehead{
+	font-size: 34px;
+	color:white;
+}
+
+h1 {
+	color:white;
+}
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+.radio{
+	margin-left: 20px;
+}
+
+
+
+
