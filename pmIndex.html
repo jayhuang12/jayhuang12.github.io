@@ -54,11 +54,19 @@
 					        value: 15,
 					        color: "#FDB45C",
 					        highlight: "#FFC870",
-					        label: "Missle Defense"
+					        label: "Missle Defenses"
 					    }
-					]
+					];
+					var options = {
+				        tooltipEvents: [],
+				        showTooltips: true,
+				        onAnimationComplete: function() {
+				            this.showTooltip(this.segments, true);
+				        },
+				        tooltipTemplate: "<%= label %> - <%= value %>"
+				    };
 
-					var myDoughnutChart = new Chart(ctx).Doughnut(data);
+					var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
 				}
 			);
 	 	</script>
@@ -94,7 +102,25 @@
 					    ]
 					};
 
-					var myBarChart = new Chart(ctx).Bar(data);
+					var options = {
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.bars.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y);
+            					});
+            				});
+            			}
+					};
+
+					var myBarChart = new Chart(ctx).Bar(data,options);
 				}
 			);
 	 	</script>
@@ -144,8 +170,27 @@
 					    ]
 					};
 
-					var myLineChart = new Chart(ctx).Line(data);
-				}
+					var options = {
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.points.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y-3);
+            					});
+            				});
+            			}
+					};
+
+					var myLineChart = new Chart(ctx).Line(data, options);
+
+            		}
 			);
 	 	</script>
 
