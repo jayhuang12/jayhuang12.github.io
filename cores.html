@@ -95,6 +95,9 @@
 
 		<br>
 		<canvas id="openclose" class='img-responsive' height="300"></canvas>
+		<br>
+		<div id = "legend" class = "chart-legend"></div>
+
 	 	<script type="text/javascript">
 	 		$(document).ready(
 				function(){
@@ -166,6 +169,7 @@
                         	location.href = "apr.html";
                         }
 					});
+            	document.getElementById('legend').innerHTML = myBarChart.generateLegend();
             	}
 			);
 	 	</script>
