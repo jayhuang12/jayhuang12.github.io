@@ -15,7 +15,7 @@
 <body>
 	<div class="top-bar">
 		<div class="page-header">
-			
+            <a type='button' class='btn btn-primary'><span class="glyphicon glyphicon-chevron-left"></span></a>
 		  	<h1 class="text-center">Dashboard</h1>
 		</div>		
 	</div>
@@ -23,16 +23,16 @@
 	<br>
 
 	<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-<br>
+	  <div class="col-lg-6">
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="Search for...">
+	      <span class="input-group-btn">
+	        <a class="btn btn-default" type="button" href ="301.html"><span class="glyphicon glyphicon-search"></span></a>
+	      </span>
+	    </div>
+	  </div>
+	</div>
+	<br>
 
 
 	<div class="panel panel-default">
@@ -142,6 +142,12 @@
 					            data: [15, 10, 11, 10]
 					        }
 					    ]
+					};
+
+					var options = {
+						legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span class=\"<%=name.toLowerCase()%>-legend-icon\" style=\"background-color:<%=datasets[i].fillColor%>\"></span><span class=\"<%=name.toLowerCase()%>-legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+
+
 					};
 
 					var myBarChart = new Chart(ctx).Bar(data, options);
@@ -291,6 +297,8 @@
 	</div>
     </div>
   </div>
+
+
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
