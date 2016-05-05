@@ -55,9 +55,9 @@ canvas {
 
 li
 {
-display: inline;
-list-style-type: none;
-padding-right: 30px;
+    display: inline;
+    list-style-type: none;
+    padding-right: 30px;
 }
 
 ul
