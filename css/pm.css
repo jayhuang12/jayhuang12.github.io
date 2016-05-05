@@ -53,9 +53,17 @@ canvas {
     margin-right: 5px;
 }
 
+li
+{
+display: inline;
+list-style-type: none;
+padding-right: 30px;
+}
+
 ul
 {
     list-style-type: none;
+    padding-left: 100px;
 }
 
 h1 {
